@@ -23,7 +23,7 @@
     <string name="finished_completed">Session complete</string>
     <string name="finished_stopped">Session ended</string>
     <string name="finished_meditated">Meditated %1$s</string>
-    <string name="finished_not_saved">Under %1$d seconds, so it was not saved to the calendar.</string>
+    <string name="finished_not_saved">Sessions under %1$s are not saved to the calendar.</string>
 
     <!-- Calendar -->
     <string name="calendar_month_empty">No sessions this month</string>

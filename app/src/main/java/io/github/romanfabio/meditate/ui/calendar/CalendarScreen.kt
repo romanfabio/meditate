@@ -25,7 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +55,7 @@ fun CalendarScreen(modifier: Modifier = Modifier, viewModel: CalendarViewModel =
     val selected by viewModel.selected.collectAsStateWithLifecycle()
     val totals by viewModel.dayTotals.collectAsStateWithLifecycle()
     val sessions by viewModel.selectedSessions.collectAsStateWithLifecycle()
-    val locale = Locale.getDefault()
+    val locale = LocalConfiguration.current.locales[0]
 
     LazyColumn(
         modifier = modifier.fillMaxSize().padding(horizontal = 16.dp),
@@ -229,7 +229,7 @@ private fun DayHeader(date: LocalDate, total: DayTotal?, locale: Locale) {
 
 @Composable
 private fun SessionRow(session: SessionEntity) {
-    val locale = Locale.getDefault()
+    val locale = LocalConfiguration.current.locales[0]
     val time = Instant.ofEpochMilli(session.startedAtEpochMs)
         .atZone(ZoneId.systemDefault())
         .format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(locale))

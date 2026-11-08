@@ -295,7 +295,7 @@ private fun FinishedContent(state: SessionState.Finished, onDone: () -> Unit) {
         if (state.meditatedSeconds < SessionRepository.MIN_RECORD_SECONDS) {
             Spacer(Modifier.height(8.dp))
             Text(
-                stringResource(R.string.finished_not_saved, SessionRepository.MIN_RECORD_SECONDS),
+                stringResource(R.string.finished_not_saved, formatDuration(SessionRepository.MIN_RECORD_SECONDS)),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,

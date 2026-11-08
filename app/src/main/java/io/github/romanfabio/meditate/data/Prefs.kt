@@ -2,6 +2,7 @@ package io.github.romanfabio.meditate.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
 /** Small key/value settings. Everything here is tiny, so plain SharedPreferences is enough. */
 class Prefs(context: Context) {
@@ -11,22 +12,22 @@ class Prefs(context: Context) {
     /** Last duration a session was *started* with. Defaults to 20 minutes. */
     var lastDurationSeconds: Int
         get() = sp.getInt(KEY_LAST_DURATION, DEFAULT_DURATION_SECONDS)
-        set(value) = sp.edit().putInt(KEY_LAST_DURATION, value).apply()
+        set(value) = sp.edit { putInt(KEY_LAST_DURATION, value) }
 
     /** Whether Do Not Disturb should be enabled during sessions. */
     var dndEnabled: Boolean
         get() = sp.getBoolean(KEY_DND_ENABLED, true)
-        set(value) = sp.edit().putBoolean(KEY_DND_ENABLED, value).apply()
+        set(value) = sp.edit { putBoolean(KEY_DND_ENABLED, value) }
 
     /** True while this app has switched DND on and still has to switch it off again. */
     var dndOwned: Boolean
         get() = sp.getBoolean(KEY_DND_OWNED, false)
-        set(value) = sp.edit().putBoolean(KEY_DND_OWNED, value).apply()
+        set(value) = sp.edit(commit = true) { putBoolean(KEY_DND_OWNED, value) }
 
     /** Interruption filter that was active before this app changed it. */
     var dndPreviousFilter: Int
         get() = sp.getInt(KEY_DND_PREVIOUS, 1)
-        set(value) = sp.edit().putInt(KEY_DND_PREVIOUS, value).apply()
+        set(value) = sp.edit(commit = true) { putInt(KEY_DND_PREVIOUS, value) }
 
     companion object {
         const val DEFAULT_DURATION_SECONDS = 20 * 60

@@ -1,6 +1,7 @@
 package io.github.romanfabio.meditate.ui.about
 
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +41,13 @@ fun AboutScreen(modifier: Modifier = Modifier) {
     val data = remember { runCatching { readLicenseData(context) }.getOrDefault(LicenseData(emptyList(), emptyList())) }
     val version = remember {
         runCatching {
-            val info = context.packageManager.getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
+            val pm = context.packageManager
+            val info = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                pm.getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
+            } else {
+                @Suppress("DEPRECATION")
+                pm.getPackageInfo(context.packageName, 0)
+            }
             "${info.versionName} (${info.longVersionCode})"
         }.getOrDefault("")
     }

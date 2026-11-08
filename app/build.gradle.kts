@@ -1,4 +1,5 @@
 import com.mikepenz.aboutlibraries.plugin.StrictMode
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -52,8 +53,26 @@ android {
         versionName = "1.0.0"
     }
 
+    // Release signing: reads keystore.properties (git-ignored, see README). Without it the release
+    // APK is simply left unsigned, so the project still builds on a fresh checkout.
+    val keystoreFile = rootProject.file("keystore.properties")
+    val keystoreProps = Properties()
+    if (keystoreFile.exists()) keystoreFile.inputStream().use { keystoreProps.load(it) }
+
+    signingConfigs {
+        if (keystoreFile.exists()) {
+            create("release") {
+                storeFile = file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfigs.findByName("release")?.let { signingConfig = it }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

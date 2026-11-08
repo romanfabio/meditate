@@ -8,6 +8,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
+import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
@@ -38,11 +39,13 @@ class SessionService : Service() {
         manager = (application as MeditateApp).sessionManager
         createChannel()
         // Must call startForeground quickly after startForegroundService().
-        startForeground(
-            NOTIFICATION_ID,
-            buildNotification(manager.state.value, false),
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
-        )
+        val initial = buildNotification(manager.state.value, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            // The specialUse type only exists on Android 14+; older versions take no type.
+            startForeground(NOTIFICATION_ID, initial, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        } else {
+            startForeground(NOTIFICATION_ID, initial)
+        }
         scope.launch {
             combine(manager.state, manager.bell.playing) { s, p -> s to p }.collect { (s, p) -> onState(s, p) }
         }
