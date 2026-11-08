@@ -1,11 +1,16 @@
 # Gradle / Android
 .gradle/
+.kotlin/
 build/
 local.properties
 *.apk
 *.aab
 .cxx/
+.externalNativeBuild/
 captures/
+*.log
+*.hprof
+hs_err_pid*
 
 # Signing material (never commit)
 keystore.properties
