@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meditate</string>
+    <string name="tab_timer">Timer</string>
+    <string name="tab_calendar">Calendar</string>
+    <string name="tab_about">About</string>
+</resources>
