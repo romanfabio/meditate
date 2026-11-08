@@ -4,4 +4,15 @@
     <string name="tab_timer">Timer</string>
     <string name="tab_calendar">Calendar</string>
     <string name="tab_about">About</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_name">Meditation session</string>
+    <string name="notification_starting">Starting…</string>
+    <string name="notification_running">Meditating</string>
+    <string name="notification_paused">Paused — %1$s left</string>
+    <string name="notification_complete">Session complete</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_resume">Resume</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_cancel">Cancel</string>
 </resources>

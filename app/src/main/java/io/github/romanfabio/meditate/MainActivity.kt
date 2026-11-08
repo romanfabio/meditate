@@ -37,14 +37,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MeditateTheme {
-                MeditateApp()
+                MeditateRoot()
             }
         }
     }
 }
 
 @Composable
-private fun MeditateApp() {
+private fun MeditateRoot() {
     var selected by rememberSaveable { mutableIntStateOf(0) }
     Scaffold(
         bottomBar = {
