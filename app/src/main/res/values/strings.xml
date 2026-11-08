@@ -5,6 +5,38 @@
     <string name="tab_calendar">Calendar</string>
     <string name="tab_about">About</string>
 
+    <!-- Timer -->
+    <string name="unit_hours">hours</string>
+    <string name="unit_minutes">min</string>
+    <string name="unit_seconds">sec</string>
+    <string name="start">Start</string>
+    <string name="done">Done</string>
+    <string name="paused_label">Paused</string>
+    <string name="countdown_title">Get comfortable…</string>
+    <string name="dnd_switch_title">Do Not Disturb</string>
+    <string name="dnd_switch_subtitle">Silence notifications during the session</string>
+    <string name="dnd_dialog_title">Allow Do Not Disturb?</string>
+    <string name="dnd_dialog_body">To silence your phone during a session, Meditate needs Do Not Disturb access. You can grant it in the system settings; it is only used while a session is running.</string>
+    <string name="dnd_dialog_open">Open settings</string>
+    <string name="dnd_dialog_skip">Start without</string>
+    <string name="dnd_dialog_cancel">Cancel</string>
+    <string name="finished_completed">Session complete</string>
+    <string name="finished_stopped">Session ended</string>
+    <string name="finished_meditated">Meditated %1$s</string>
+    <string name="finished_not_saved">Under %1$d seconds, so it was not saved to the calendar.</string>
+
+    <!-- Calendar -->
+    <string name="calendar_month_empty">No sessions this month</string>
+    <string name="calendar_month_total">%1$s this month</string>
+    <string name="calendar_day_total">%1$s total</string>
+    <string name="calendar_day_empty">No sessions on this day</string>
+    <string name="session_completed">Completed</string>
+    <string name="session_stopped">Stopped early</string>
+    <plurals name="sessions_count">
+        <item quantity="one">%1$d session</item>
+        <item quantity="other">%1$d sessions</item>
+    </plurals>
+
     <!-- Notification -->
     <string name="notification_channel_name">Meditation session</string>
     <string name="notification_starting">Starting…</string>
