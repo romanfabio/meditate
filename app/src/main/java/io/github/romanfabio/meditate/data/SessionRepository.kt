@@ -33,6 +33,9 @@ class SessionRepository(private val dao: SessionDao) {
         return true
     }
 
+    /** Permanently removes every recorded session. */
+    suspend fun clearAll() = dao.deleteAll()
+
     /** Totals for every day of [month] that has at least one session, keyed by date. */
     fun observeMonth(month: YearMonth): Flow<List<DayTotal>> =
         dao.observeDayTotals(month.atDay(1).toString(), month.atEndOfMonth().toString())

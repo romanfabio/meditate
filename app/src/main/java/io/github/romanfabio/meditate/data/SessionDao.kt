@@ -23,6 +23,9 @@ interface SessionDao {
     )
     fun observeDayTotals(fromDate: String, toDate: String): Flow<List<DayTotal>>
 
+    @Query("DELETE FROM sessions")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM sessions WHERE localDate = :date ORDER BY startedAtEpochMs ASC")
     fun observeSessionsOn(date: String): Flow<List<SessionEntity>>
 }

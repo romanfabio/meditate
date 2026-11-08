@@ -2,6 +2,14 @@ package io.github.romanfabio.meditate.ui.about
 
 import android.content.pm.PackageManager
 import android.os.Build
+import android.widget.Toast
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.rememberCoroutineScope
+import io.github.romanfabio.meditate.MeditateApp
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -55,6 +63,30 @@ fun AboutScreen(modifier: Modifier = Modifier) {
     var appLicenseOpen by rememberSaveable { mutableStateOf(false) }
     var openLicenseId by rememberSaveable { mutableStateOf<String?>(null) }
     var openLibrary by rememberSaveable { mutableStateOf<String?>(null) }
+    var showClearDialog by rememberSaveable { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+
+    if (showClearDialog) {
+        AlertDialog(
+            onDismissRequest = { showClearDialog = false },
+            title = { Text(stringResource(R.string.about_clear_dialog_title)) },
+            text = { Text(stringResource(R.string.about_clear_dialog_body)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showClearDialog = false
+                        scope.launch {
+                            (context.applicationContext as MeditateApp).repository.clearAll()
+                            Toast.makeText(context, R.string.about_clear_done, Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                ) { Text(stringResource(R.string.about_clear_confirm), color = MaterialTheme.colorScheme.error) }
+            },
+            dismissButton = {
+                TextButton(onClick = { showClearDialog = false }) { Text(stringResource(R.string.action_cancel)) }
+            },
+        )
+    }
 
     LazyColumn(
         modifier = modifier.fillMaxSize().padding(horizontal = 20.dp),
@@ -72,6 +104,24 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                 }
                 Spacer(Modifier.height(8.dp))
                 Text(stringResource(R.string.about_description), style = MaterialTheme.typography.bodyMedium)
+            }
+        }
+
+        // --- Data ---
+        item { SectionTitle(stringResource(R.string.about_data_title)) }
+        item {
+            Column(Modifier.padding(bottom = 8.dp)) {
+                OutlinedButton(
+                    onClick = { showClearDialog = true },
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error),
+                    modifier = Modifier.fillMaxWidth(),
+                ) { Text(stringResource(R.string.about_clear_button)) }
+                Text(
+                    stringResource(R.string.about_clear_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 6.dp),
+                )
             }
         }
 

@@ -37,6 +37,15 @@
         <item quantity="other">%1$d sessions</item>
     </plurals>
 
+    <!-- Clear data (About page) -->
+    <string name="about_data_title">Data</string>
+    <string name="about_clear_button">Clear all sessions</string>
+    <string name="about_clear_hint">Removes every session from the calendar. This cannot be undone.</string>
+    <string name="about_clear_dialog_title">Clear all sessions?</string>
+    <string name="about_clear_dialog_body">All meditation history in the calendar will be permanently deleted.</string>
+    <string name="about_clear_confirm">Delete all</string>
+    <string name="about_clear_done">All sessions cleared</string>
+
     <!-- About -->
     <string name="about_version">Version %1$s</string>
     <string name="about_description">A quiet, offline meditation timer. No ads, no tracking, no internet access.</string>
