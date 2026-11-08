@@ -1,7 +1,43 @@
+import com.mikepenz.aboutlibraries.plugin.StrictMode
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.aboutlibraries)
+}
+
+// Only permissive licenses are acceptable for anything that ends up in the APK. The build fails
+// if a dependency with another license sneaks in.
+aboutLibraries {
+    license {
+        strictMode = StrictMode.FAIL
+        allowedLicenses.addAll("Apache-2.0", "MIT", "BSD-2-Clause", "BSD-3-Clause", "ISC")
+    }
+}
+
+// Ships the repository's LICENSE file inside the APK so the About page shows the real text.
+abstract class CopyLicenseTask : DefaultTask() {
+    @get:InputFile
+    abstract val licenseFile: RegularFileProperty
+
+    @get:OutputDirectory
+    abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun copy() {
+        licenseFile.get().asFile.copyTo(outputDir.get().file("LICENSE.txt").asFile, overwrite = true)
+    }
+}
+
+val copyLicense = tasks.register<CopyLicenseTask>("copyLicense") {
+    licenseFile.set(rootProject.layout.projectDirectory.file("LICENSE"))
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.sources.assets?.addGeneratedSourceDirectory(copyLicense, CopyLicenseTask::outputDir)
+    }
 }
 
 android {

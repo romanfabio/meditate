@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import io.github.romanfabio.meditate.ui.about.AboutScreen
 import io.github.romanfabio.meditate.ui.calendar.CalendarScreen
 import io.github.romanfabio.meditate.ui.theme.MeditateTheme
 import io.github.romanfabio.meditate.ui.timer.TimerScreen
@@ -69,9 +70,7 @@ private fun MeditateRoot() {
         when (Tab.entries[selected]) {
             Tab.Timer -> TimerScreen(content)
             Tab.Calendar -> CalendarScreen(content)
-            Tab.About -> Box(content.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.tab_about)) // replaced in the About milestone
-            }
+            Tab.About -> AboutScreen(content)
         }
     }
 }

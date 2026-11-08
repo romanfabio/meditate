@@ -37,6 +37,20 @@
         <item quantity="other">%1$d sessions</item>
     </plurals>
 
+    <!-- About -->
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">A quiet, offline meditation timer. No ads, no tracking, no internet access.</string>
+    <string name="about_app_license_title">License</string>
+    <string name="about_app_license_name">MIT License</string>
+    <string name="about_app_license_hint">Copyright © 2026 Fabio Roman · tap to read</string>
+    <string name="about_assets_note">The bell sounds and the app icon were created for this project and are covered by the same license.</string>
+    <string name="about_third_party_title">Open source libraries</string>
+    <string name="about_third_party_intro">Meditate is built with the following open source libraries. Tap a license to read the full text, or a library for details.</string>
+    <plurals name="about_libraries_count">
+        <item quantity="one">%1$d library</item>
+        <item quantity="other">%1$d libraries</item>
+    </plurals>
+
     <!-- Notification -->
     <string name="notification_channel_name">Meditation session</string>
     <string name="notification_starting">Starting…</string>
